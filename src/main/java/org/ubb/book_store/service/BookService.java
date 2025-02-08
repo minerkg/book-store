@@ -30,4 +30,19 @@ public class BookService implements IBookService {
 
         return bookRepository.findAll();
     }
+
+    @Override
+    public List<Book> getAllBooksFilteredByTitle(String title) {
+        return bookRepository.findByTitle(title);
+    }
+
+    @Override
+    public List<Book> getAllBooksFilteredByYear(Integer year) {
+        return bookRepository.findByYear(year);
+    }
+
+    @Override
+    public List<Book> getAllBooksFilteredByRating(Integer rating) {
+        return bookRepository.findByRating(rating);
+    }
 }
