@@ -2,9 +2,11 @@ package org.ubb.book_store.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.ubb.book_store.domain.Book;
+import org.ubb.book_store.dto.BookDto;
 import org.ubb.book_store.service.IBookService;
 
 import java.util.ArrayList;
@@ -24,9 +26,15 @@ public class BookController {
     }
 
 
-    @GetMapping("/book/{id}")
-    public Book getBookById(@PathVariable Long id) {
-        return bookService.getBookById(id);
+    @PutMapping("/books/{id}")
+    ResponseEntity<ApiResponse<Book>> updateBook(@PathVariable Long id, @RequestBody BookDto book) {
+        try {
+            this.bookService.update(id, book);
+            return ResponseEntity.status(HttpStatus.CREATED).build();
+        } catch (Exception e) {
+            return  ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+
     }
 
 
@@ -34,7 +42,6 @@ public class BookController {
     ResponseEntity<ApiResponse<List<Book>>> getAllBooksFiltered(@RequestParam(required = false) String title,
                                                                 @RequestParam(required = false) String year,
                                                                 @RequestParam(required = false) String rating) {
-
 
         List<Book> bookList = bookService.getAllBooksFiltered();
         if (title != null) {
@@ -46,11 +53,12 @@ public class BookController {
         if (rating != null) {
             bookList = bookService.getAllBooksFilteredByRating(Integer.valueOf(rating));
         }
-
-
         return ResponseEntity.ok().body(new ApiResponse<>("List of books", bookList));
 
     }
+
+
+
 
 
 }
