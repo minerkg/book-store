@@ -2,12 +2,15 @@ package org.ubb.book_store.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.ubb.book_store.domain.Book;
+import org.ubb.book_store.dto.BookDto;
 import org.ubb.book_store.repository.BookRepository;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class BookService implements IBookService {
 
 
@@ -44,5 +47,16 @@ public class BookService implements IBookService {
     @Override
     public List<Book> getAllBooksFilteredByRating(Integer rating) {
         return bookRepository.findByRating(rating);
+    }
+
+    @Override
+    public void update(Long id, BookDto book) {
+        bookRepository.findById(id).ifPresent(
+                existingBook -> {
+                    existingBook.setRating(book.getRating());
+                    existingBook.setYear(book.getYear());
+                    existingBook.setTitle(book.getTitle());
+                }
+        );
     }
 }
