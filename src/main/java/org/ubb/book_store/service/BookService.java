@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import org.ubb.book_store.domain.Book;
 import org.ubb.book_store.repository.BookRepository;
 
+import java.util.List;
+
 @Service
 public class BookService implements IBookService {
 
@@ -21,5 +23,11 @@ public class BookService implements IBookService {
         return bookRepository.findById(id).orElseThrow(
                 () -> new RuntimeException("Book doesn't find!")
         );
+    }
+
+    @Override
+    public List<Book> getAllBooksFiltered() {
+
+        return bookRepository.findAll();
     }
 }
