@@ -24,9 +24,12 @@ public class AuthorService implements IAuthorService{
 
     @Override
     public void addAuthor(Author newAuthor) {
-        authorRepository.findBySsn().orElseThrow(
-                () -> new ResourceAlreadyExists()
-        );
+        String existingSsn = newAuthor.getSsn();
+
+        authorRepository.findBySsn(existingSsn)
+                .ifPresent( s -> { throw new ResourceAlreadyExists();}
+                );
+
         authorRepository.save(newAuthor);
 
     }

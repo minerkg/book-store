@@ -36,6 +36,7 @@ public class AuthorController {
             authorService.addAuthor(newAuthor);
             return ResponseEntity.status(HttpStatus.CREATED).build();
         } catch (ResourceAlreadyExists e) {
+            e.printStackTrace();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(new ApiResponse<>("Author already exists", null));
 
