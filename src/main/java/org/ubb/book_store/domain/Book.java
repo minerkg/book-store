@@ -11,14 +11,12 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @Entity
-public class Book {
-
-    @Id
-    private Long id;
-    private String title;
+public class Book extends BaseEntity<Long>{
 
 
-    public Book() {
+    String title;
+    int year;
+    int rating;
 
-    }
+
 }
