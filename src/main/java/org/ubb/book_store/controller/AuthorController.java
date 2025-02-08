@@ -20,7 +20,7 @@ public class AuthorController {
     private IAuthorService authorService;
 
 
-    @GetMapping("/books")
+    @GetMapping("/authors")
     ResponseEntity<ApiResponse<List<Author>>> getAllAuthor() {
         try {
             List<Author> authorList = authorService.getAllAuthors();
