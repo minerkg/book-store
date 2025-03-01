@@ -10,14 +10,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.ubb.book_store.config.util.JwtUtil;
 import org.ubb.book_store.models.AuthenticationRequest;
 import org.ubb.book_store.models.AuthenticationResponse;
 
 @RestController
-@RequestMapping("/authenticate")
 public class AuthenticationController {
 
     @Autowired
@@ -30,7 +28,7 @@ public class AuthenticationController {
     @Autowired
     private JwtUtil jwtUtil;
 
-    @PostMapping
+    @PostMapping("/authenticate")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest)
             throws RuntimeException {
         try {
@@ -50,5 +48,6 @@ public class AuthenticationController {
         return ResponseEntity.ok(new AuthenticationResponse(jwtToken));
 
     }
+
 
 }
