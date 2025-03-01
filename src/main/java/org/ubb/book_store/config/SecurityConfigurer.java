@@ -22,7 +22,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @Configuration
 public class SecurityConfigurer {
     @Bean
-    public InMemoryUserDetailsManager userDetailsService() {
+    public UserDetailsService userDetailsService() {
         UserDetails user = User.withDefaultPasswordEncoder()
                 .username("user1")
                 .password("user1")

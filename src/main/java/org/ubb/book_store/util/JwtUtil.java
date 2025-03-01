@@ -1,4 +1,4 @@
-package org.ubb.book_store.config.util;
+package org.ubb.book_store.util;
 
 
 import io.jsonwebtoken.Claims;
