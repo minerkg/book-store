@@ -43,8 +43,8 @@ public class SecurityConfigurer {
                         .anyRequest().authenticated()
                 ).sessionManagement((session) -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                )
-                .httpBasic(withDefaults());
+                );
+//                .httpBasic(withDefaults());
         //.oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 
